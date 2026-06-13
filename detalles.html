@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles Prácticos - La Vuelta al Copeo 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* SIDEBAR */
+        .sidebar { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 4px; }
+        .sidebar a { display: flex; align-items: center; background: #1a1a1a; color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 10px; border-radius: 8px 0 0 8px; border-left: 3px solid #e50000; transition: all 0.3s ease; white-space: nowrap; overflow: hidden; max-width: 42px; }
+        .sidebar a:hover { max-width: 210px; background: #e50000; padding-right: 14px; }
+        .sidebar a.active { background: #e50000; max-width: 210px; padding-right: 14px; }
+        .sidebar a .icon { font-size: 1rem; flex-shrink: 0; }
+        .sidebar a .label { margin-left: 10px; }
+
+        /* TOP NAV */
+        .top-nav { background: #1a1a1a; padding: 14px 0; border-bottom: 3px solid #e50000; }
+        .top-nav .container { display: flex; align-items: center; gap: 20px; }
+        .top-nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .top-nav a:hover { color: #e50000; }
+        .top-nav a.home { color: #ffd700; }
+
+        /* PAGE HEADER */
+        .page-header { background: linear-gradient(120deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 70px 0 60px; text-align: center; position: relative; overflow: hidden; }
+        .page-header::after { content: ''; position: absolute; top:0;left:0;right:0;bottom:0; background: url('toros.jpg') center/cover; opacity: 0.2; z-index: 0; }
+        .page-header-content { position: relative; z-index: 1; }
+        .page-header-tag { display: inline-block; background: rgba(229,0,0,0.9); padding: 6px 18px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; margin: 10px 0; }
+        .page-header p { font-size: 1.15rem; opacity: 0.85; max-width: 600px; margin: 16px auto 0; line-height: 1.6; }
+
+        /* CONTENT */
+        section { padding: 80px 0; }
+        section:nth-child(odd) { background: #fafafa; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+        .info-card {
+            background: white;
+            border-radius: 14px;
+            padding: 36px 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border-top: 4px solid #e50000;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover { transform: translateY(-8px); box-shadow: 0 12px 35px rgba(229,0,0,0.12); }
+        .info-card .emoji { font-size: 2.8rem; margin-bottom: 16px; display: block; }
+        .info-card strong { display: block; font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .info-card span { font-size: 1.3rem; font-weight: 800; color: #e50000; }
+
+        .detail-list { margin-top: 50px; display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .detail-row { display: flex; align-items: flex-start; gap: 20px; background: white; border-radius: 12px; padding: 24px 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border-left: 4px solid #e50000; }
+        .detail-icon { font-size: 2rem; flex-shrink: 0; }
+        .detail-text strong { display: block; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+        .detail-text p { color: #555; font-size: 0.97rem; line-height: 1.5; }
+
+        .section-header { text-align: center; margin-bottom: 10px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #1a1a1a; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: #e50000; border-radius: 2px; }
+        .section-header p { font-size: 1.1rem; color: #666; max-width: 550px; margin: 36px auto 0; }
+
+        /* CTA */
+        .cta-box { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 50px; border-radius: 16px; text-align: center; margin: 60px 0; }
+        .cta-box h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 16px; }
+        .cta-box p { font-size: 1.1rem; margin-bottom: 24px; opacity: 0.9; }
+        .btn { padding: 14px 40px; border-radius: 8px; border: none; font-weight: 700; font-size: 1.05rem; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; display: inline-block; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: #e50000; color: white; box-shadow: 0 8px 25px rgba(229,0,0,0.3); }
+        .btn-primary:hover { background: #c40000; transform: translateY(-3px); }
+
+        /* FOOTER */
+        footer { background: #1a1a1a; color: white; padding: 40px 0; text-align: center; border-top: 3px solid #e50000; }
+        footer p { margin-bottom: 10px; font-size: 1rem; }
+        footer a { color: #ffd700; text-decoration: none; font-weight: 600; }
+        footer a:hover { color: #e50000; }
+        .footer-bottom { border-top: 1px solid #333; margin-top: 24px; padding-top: 24px; color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 768px) { .sidebar { display: none; } .page-header h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <a href="cronologia.html"><span class="icon">⏱</span><span class="label">Cronología del Evento</span></a>
+        <a href="detalles.html" class="active"><span class="icon">📋</span><span class="label">Detalles Prácticos</span></a>
+        <a href="que-incluye.html"><span class="icon">🎟</span><span class="label">Qué Incluye</span></a>
+        <a href="faq.html"><span class="icon">❓</span><span class="label">Preguntas Frecuentes</span></a>
+    </nav>
+
+    <!-- TOP NAV -->
+    <div class="top-nav">
+        <div class="container">
+            <a href="index.html" class="home">← Inicio</a>
+            <span style="color:#555">|</span>
+            <a href="cronologia.html">Cronología</a>
+            <a href="detalles.html">Detalles</a>
+            <a href="que-incluye.html">Qué Incluye</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <span class="page-header-tag">📋 Todo lo que necesitas saber</span>
+                <h1>Detalles Prácticos</h1>
+                <p>Fecha, lugar, horario y todo lo que tienes que saber antes de llegar.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO CARDS -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>De un vistazo</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <span class="emoji">📅</span>
+                    <strong>Fecha</strong>
+                    <span>7 Septiembre, 2026</span>
+                </div>
+                <div class="info-card">
+                    <span class="emoji">🕐</span>
+                    <strong>Horario</strong>
+                    <span>09:30 — 19:00</span>
+                </div>
+                <div class="info-card">
+                    <span class="emoji">📍</span>
+                    <strong>Lugar</strong>
+                    <span>Finca Privada</span>
+                </div>
+                <div class="info-card">
+                    <span class="emoji">👥</span>
+                    <strong>Aforo</strong>
+                    <span>400 Personas</span>
+                </div>
+                <div class="info-card">
+                    <span class="emoji">💶</span>
+                    <strong>Precio</strong>
+                    <span>45€ Todo Incluido</span>
+                </div>
+                <div class="info-card">
+                    <span class="emoji">🔞</span>
+                    <strong>Edad mínima</strong>
+                    <span>+18 años</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAIL LIST -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Más detalles</h2>
+                <p>Información adicional para que vengas preparado</p>
+            </div>
+            <div class="detail-list">
+                <div class="detail-row">
+                    <div class="detail-icon">🎟</div>
+                    <div class="detail-text">
+                        <strong>Cómo acceder al evento</strong>
+                        <p>Recibirás un código QR por email al comprar tu entrada. Preséntalo en la puerta al llegar. No hace falta imprimirlo, vale con el móvil.</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">👕</div>
+                    <div class="detail-text">
+                        <strong>¿Qué llevar?</strong>
+                        <p>Ropa cómoda para el ruedo, protector solar, gafas de sol y ganas de pasarlo bien. El evento es al aire libre.</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">🚗</div>
+                    <div class="detail-text">
+                        <strong>Cómo llegar</strong>
+                        <p>La dirección exacta se enviará a todos los asistentes por email una semana antes del evento. Habrá parking habilitado en la finca.</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">🌦</div>
+                    <div class="detail-text">
+                        <strong>¿Y si llueve?</strong>
+                        <p>El evento se celebra lluvia o no. Contamos con zonas cubiertas para refugiarse. Solo se cancela en caso de fenómeno meteorológico extremo.</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">📵</div>
+                    <div class="detail-text">
+                        <strong>Política de reembolso</strong>
+                        <p>No hay reembolsos, pero puedes transferir tu entrada a otra persona sin ningún problema. Contáctanos para gestionarlo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="container">
+        <div class="cta-box">
+            <h2>¿Todo claro? Compra tu entrada</h2>
+            <p>Plazas limitadas a 400 personas. No te quedes fuera.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6KiA7sERc7qhRiIDsGmnAHYSU79giXDsk3guUvxmSrwemzw/viewform?usp=publish-editor" target="_blank" class="btn btn-primary">Comprar Entrada • 45€</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>📧 <a href="mailto:info@vueltacopeo.es">info@vueltacopeo.es</a> | 📱 +34 XXX XXX XXX</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 La Vuelta al Copeo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - La Vuelta al Copeo 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* SIDEBAR */
+        .sidebar { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 4px; }
+        .sidebar a { display: flex; align-items: center; background: #1a1a1a; color: white; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 10px; border-radius: 8px 0 0 8px; border-left: 3px solid #e50000; transition: all 0.3s ease; white-space: nowrap; overflow: hidden; max-width: 42px; }
+        .sidebar a:hover { max-width: 210px; background: #e50000; padding-right: 14px; }
+        .sidebar a.active { background: #e50000; max-width: 210px; padding-right: 14px; }
+        .sidebar a .icon { font-size: 1rem; flex-shrink: 0; }
+        .sidebar a .label { margin-left: 10px; }
+
+        /* TOP NAV */
+        .top-nav { background: #1a1a1a; padding: 14px 0; border-bottom: 3px solid #e50000; }
+        .top-nav .container { display: flex; align-items: center; gap: 20px; }
+        .top-nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .top-nav a:hover { color: #e50000; }
+        .top-nav a.home { color: #ffd700; }
+
+        /* PAGE HEADER */
+        .page-header { background: linear-gradient(120deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 70px 0 60px; text-align: center; position: relative; overflow: hidden; }
+        .page-header::after { content: ''; position: absolute; top:0;left:0;right:0;bottom:0; background: url('toros.jpg') center/cover; opacity: 0.2; z-index: 0; }
+        .page-header-content { position: relative; z-index: 1; }
+        .page-header-tag { display: inline-block; background: rgba(229,0,0,0.9); padding: 6px 18px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; margin: 10px 0; }
+        .page-header p { font-size: 1.15rem; opacity: 0.85; max-width: 600px; margin: 16px auto 0; line-height: 1.6; }
+
+        /* FAQ */
+        section { padding: 80px 0; }
+        section:nth-child(odd) { background: #fafafa; }
+
+        .section-header { text-align: center; margin-bottom: 10px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #1a1a1a; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: #e50000; border-radius: 2px; }
+
+        .faq-list { max-width: 800px; margin: 50px auto 0; display: flex; flex-direction: column; gap: 0; }
+        .faq-item { border-bottom: 1px solid #eee; }
+        .faq-item:first-child { border-top: 1px solid #eee; }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 22px 20px 22px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: #e50000; }
+        .faq-question .arrow { flex-shrink: 0; font-size: 1.2rem; transition: transform 0.3s; color: #e50000; }
+        .faq-question.open .arrow { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding: 0 20px 0 0; }
+        .faq-answer.open { max-height: 300px; padding-bottom: 20px; }
+        .faq-answer p { color: #555; line-height: 1.7; font-size: 1rem; }
+
+        /* CTA */
+        .cta-box { background: linear-gradient(135deg, #e50000 0%, #ff6b6b 100%); color: white; padding: 50px; border-radius: 16px; text-align: center; margin: 60px 0; }
+        .cta-box h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 16px; }
+        .cta-box p { font-size: 1.1rem; margin-bottom: 24px; opacity: 0.9; }
+        .btn { padding: 14px 40px; border-radius: 8px; border: none; font-weight: 700; font-size: 1.05rem; cursor: pointer; text-decoration: none; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; display: inline-block; font-family: 'Inter', sans-serif; }
+        .btn-white { background: white; color: #e50000; }
+        .btn-white:hover { background: #1a1a1a; color: white; transform: translateY(-3px); }
+
+        /* CONTACT */
+        .contact-section { text-align: center; padding: 60px 20px; }
+        .contact-section h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 16px; }
+        .contact-section p { color: #555; font-size: 1.05rem; margin-bottom: 24px; }
+        .contact-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .contact-link { background: #1a1a1a; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: background 0.2s; }
+        .contact-link:hover { background: #e50000; }
+
+        /* FOOTER */
+        footer { background: #1a1a1a; color: white; padding: 40px 0; text-align: center; border-top: 3px solid #e50000; }
+        footer p { margin-bottom: 10px; font-size: 1rem; }
+        footer a { color: #ffd700; text-decoration: none; font-weight: 600; }
+        footer a:hover { color: #e50000; }
+        .footer-bottom { border-top: 1px solid #333; margin-top: 24px; padding-top: 24px; color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 768px) { .sidebar { display: none; } .page-header h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <a href="cronologia.html"><span class="icon">⏱</span><span class="label">Cronología del Evento</span></a>
+        <a href="detalles.html"><span class="icon">📋</span><span class="label">Detalles Prácticos</span></a>
+        <a href="que-incluye.html"><span class="icon">🎟</span><span class="label">Qué Incluye</span></a>
+        <a href="faq.html" class="active"><span class="icon">❓</span><span class="label">Preguntas Frecuentes</span></a>
+    </nav>
+
+    <!-- TOP NAV -->
+    <div class="top-nav">
+        <div class="container">
+            <a href="index.html" class="home">← Inicio</a>
+            <span style="color:#555">|</span>
+            <a href="cronologia.html">Cronología</a>
+            <a href="detalles.html">Detalles</a>
+            <a href="que-incluye.html">Qué Incluye</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <span class="page-header-tag">❓ Resolvemos tus dudas</span>
+                <h1>Preguntas Frecuentes</h1>
+                <p>Todo lo que necesitas saber antes de comprar tu entrada.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Tus preguntas</h2>
+            </div>
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Cuántas entradas puedo comprar?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Máximo 5 entradas por persona. Si necesitas más, contáctanos directamente y lo gestionamos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Cómo recibo mi entrada?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Recibirás un email con un código QR. Preséntalo en la puerta el día del evento, desde el móvil. No hace falta imprimirlo.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Hay reembolso si no puedo ir?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No hay reembolsos económicos, pero puedes transferir tu entrada a otra persona sin ningún problema. Escríbenos y lo gestionamos enseguida.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Qué pasa si llueve?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>El evento se celebra llueva o no. Contamos con zonas cubiertas. Solo se suspendería en caso de fenómeno meteorológico extremo, y en ese caso se comunicaría con antelación.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Cuál es la edad mínima?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Solo pueden asistir mayores de 18 años. Traed documento de identidad válido, se pedirá en la puerta.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Puedo ir con amigos?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>¡Claro! Cada persona compra su propia entrada, pero una vez dentro disfrutáis juntos de toda la experiencia. Cuantos más seáis, mejor.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Dónde es exactamente el evento?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Es en una finca privada. La dirección exacta se enviará por email a todos los asistentes una semana antes del evento. Habrá parking en la finca.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggle(this)">
+                        ¿Hay opciones sin alcohol o vegetarianas?
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí. El bar dispone de refrescos y agua. Si tienes alguna restricción alimentaria para la comida, contáctanos antes del evento y lo gestionamos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿TIENES OTRA PREGUNTA? -->
+    <section>
+        <div class="container">
+            <div class="contact-section">
+                <h3>¿No encuentras tu respuesta?</h3>
+                <p>Escríbenos directamente y te respondemos lo antes posible.</p>
+                <div class="contact-links">
+                    <a href="mailto:info@vueltacopeo.es" class="contact-link">📧 Enviar email</a>
+                    <a href="https://wa.me/34687654321" target="_blank" class="contact-link">💬 WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="container">
+        <div class="cta-box">
+            <h2>¿Todo resuelto? Compra tu entrada</h2>
+            <p>Plazas limitadas a 400 personas. Asegura la tuya.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6KiA7sERc7qhRiIDsGmnAHYSU79giXDsk3guUvxmSrwemzw/viewform?usp=publish-editor" target="_blank" class="btn btn-white">Comprar Entrada • 45€</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>📧 <a href="mailto:info@vueltacopeo.es">info@vueltacopeo.es</a> | 📱 +34 XXX XXX XXX</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 La Vuelta al Copeo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggle(btn) {
+            btn.classList.toggle('open');
+            const answer = btn.nextElementSibling;
+            answer.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
